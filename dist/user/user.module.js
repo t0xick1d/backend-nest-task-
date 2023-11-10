@@ -6,20 +6,21 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.TopicModule = void 0;
+exports.UserModule = void 0;
 const common_1 = require("@nestjs/common");
-const topic_controller_1 = require("./topic.controller");
-const topic_service_1 = require("./topic.service");
+const user_service_1 = require("./user.service");
+const user_controller_1 = require("./user.controller");
 const mongoose_1 = require("@nestjs/mongoose");
-const topic_schema_1 = require("./schema/topic.schema");
-let TopicModule = class TopicModule {
+const register_schema_1 = require("./schema/register.schema");
+let UserModule = class UserModule {
 };
-exports.TopicModule = TopicModule;
-exports.TopicModule = TopicModule = __decorate([
+exports.UserModule = UserModule;
+exports.UserModule = UserModule = __decorate([
     (0, common_1.Module)({
-        imports: [mongoose_1.MongooseModule.forFeature([{ name: topic_schema_1.Topic.name, schema: topic_schema_1.TopicSchema }])],
-        controllers: [topic_controller_1.TopicController],
-        providers: [topic_service_1.TopicService],
+        imports: [mongoose_1.MongooseModule.forFeature([{ name: register_schema_1.User.name, schema: register_schema_1.UserSchema }])],
+        controllers: [user_controller_1.UserController],
+        providers: [user_service_1.UserService],
+        exports: [user_service_1.UserService],
     })
-], TopicModule);
-//# sourceMappingURL=topic.module.js.map
+], UserModule);
+//# sourceMappingURL=user.module.js.map

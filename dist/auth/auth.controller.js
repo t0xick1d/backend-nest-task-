@@ -12,24 +12,28 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.TopicService = void 0;
+exports.AuthController = void 0;
 const common_1 = require("@nestjs/common");
-const mongoose_1 = require("@nestjs/mongoose");
-const topic_schema_1 = require("./schema/topic.schema");
-const mongoose_2 = require("mongoose");
-let TopicService = class TopicService {
-    constructor(topicModel) {
-        this.topicModel = topicModel;
+const auth_service_1 = require("./auth.service");
+let AuthController = class AuthController {
+    constructor(authService) {
+        this.authService = authService;
     }
-    async createTopic(createTopicDto) {
-        const createTopic = await this.topicModel.create(createTopicDto);
-        return createTopic;
+    singIn(signInDto) {
+        return this.authService.singIn(signInDto.email, signInDto.password);
     }
 };
-exports.TopicService = TopicService;
-exports.TopicService = TopicService = __decorate([
-    (0, common_1.Injectable)(),
-    __param(0, (0, mongoose_1.InjectModel)(topic_schema_1.Topic.name)),
-    __metadata("design:paramtypes", [mongoose_2.Model])
-], TopicService);
-//# sourceMappingURL=topic.service.js.map
+exports.AuthController = AuthController;
+__decorate([
+    (0, common_1.HttpCode)(common_1.HttpStatus.OK),
+    (0, common_1.Post)('login'),
+    __param(0, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", void 0)
+], AuthController.prototype, "singIn", null);
+exports.AuthController = AuthController = __decorate([
+    (0, common_1.Controller)('auth'),
+    __metadata("design:paramtypes", [auth_service_1.AuthService])
+], AuthController);
+//# sourceMappingURL=auth.controller.js.map

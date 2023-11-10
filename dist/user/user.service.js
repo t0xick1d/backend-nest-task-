@@ -12,24 +12,33 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.TopicService = void 0;
+exports.UserService = void 0;
 const common_1 = require("@nestjs/common");
 const mongoose_1 = require("@nestjs/mongoose");
-const topic_schema_1 = require("./schema/topic.schema");
+const register_schema_1 = require("./schema/register.schema");
 const mongoose_2 = require("mongoose");
-let TopicService = class TopicService {
-    constructor(topicModel) {
-        this.topicModel = topicModel;
+let UserService = class UserService {
+    constructor(userModel) {
+        this.userModel = userModel;
     }
-    async createTopic(createTopicDto) {
-        const createTopic = await this.topicModel.create(createTopicDto);
-        return createTopic;
+    async register(registerAuthDto) {
+        const newUser = {
+            ...registerAuthDto,
+        };
+        const createUser = await this.userModel.create(newUser);
+        return createUser;
+    }
+    async findOne(email) {
+        return await this.userModel.findOne({ email });
+    }
+    async findByIdAndUpdate(id, obj) {
+        return await this.userModel.findByIdAndUpdate(id, obj);
     }
 };
-exports.TopicService = TopicService;
-exports.TopicService = TopicService = __decorate([
+exports.UserService = UserService;
+exports.UserService = UserService = __decorate([
     (0, common_1.Injectable)(),
-    __param(0, (0, mongoose_1.InjectModel)(topic_schema_1.Topic.name)),
+    __param(0, (0, mongoose_1.InjectModel)(register_schema_1.User.name)),
     __metadata("design:paramtypes", [mongoose_2.Model])
-], TopicService);
-//# sourceMappingURL=topic.service.js.map
+], UserService);
+//# sourceMappingURL=user.service.js.map

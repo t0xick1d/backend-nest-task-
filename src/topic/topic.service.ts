@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { TopicDocument, Topic } from './schema/topic.shema';
+import { TopicDocument, Topic } from './schema/topic.schema';
 import { Model } from 'mongoose';
 import { CreateTopicDto } from './topicDto/create-topic.dto';
 
@@ -11,8 +11,5 @@ export class TopicService {
       const createTopic = await this.topicModel.create(createTopicDto);
 
       return createTopic;
-   }
-   async findAll(userId: string): Promise<Topic[]> {
-      return this.topicModel.findById(userId);
    }
 }
