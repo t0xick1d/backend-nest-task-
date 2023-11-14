@@ -22,17 +22,17 @@
 /// <reference types="mongoose/types/validation" />
 /// <reference types="mongoose/types/virtuals" />
 /// <reference types="mongoose/types/inferschematype" />
-import { AuthDocument, User } from './schema/register.schema';
+import { AuthDocument, User, UserPublicInfo } from './schema/register.schema';
 import { Model } from 'mongoose';
 import { RegisterUserDto } from './authDto/register.dto';
 export declare class UserService {
     private userModel;
     constructor(userModel: Model<AuthDocument>);
-    register(registerAuthDto: RegisterUserDto): Promise<User>;
+    register(registerAuthDto: RegisterUserDto): Promise<UserPublicInfo>;
     findOne(email: string): Promise<User | undefined>;
-    findByIdAndUpdate(id: any, obj: any): Promise<import("mongoose").Document<unknown, {}, import("mongoose").Document<unknown, {}, User> & User & {
+    findByIdAndUpdate(id: any, obj: any): Promise<import("mongoose").Document<unknown, {}, import("mongoose").Document<unknown, {}, User> & User & Required<{
         _id: import("mongoose").Types.ObjectId;
-    }> & import("mongoose").Document<unknown, {}, User> & User & {
+    }>> & import("mongoose").Document<unknown, {}, User> & User & Required<{
         _id: import("mongoose").Types.ObjectId;
-    }>;
+    }>>;
 }

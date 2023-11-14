@@ -5,8 +5,7 @@ export type AuthDocument = HydratedDocument<User>;
 
 @Schema()
 export class User {
-   @Prop({ type: mongoose.Schema.Types.ObjectId })
-   _id;
+   _id: mongoose.Types.ObjectId;
    @Prop({ required: true, unique: true })
    nickName: string;
    @Prop({ required: true, unique: true })
@@ -15,10 +14,15 @@ export class User {
    password: string;
    @Prop()
    token: string;
-   @Prop({ default: false })
-   verify: boolean;
-   @Prop({ required: true })
+   @Prop()
    verificationToken: string;
+}
+
+export class UserPublicInfo {
+   @Prop({ required: true, unique: true })
+   nickName: string;
+   @Prop({ required: true, unique: true })
+   email: string;
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);

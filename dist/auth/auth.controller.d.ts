@@ -5,4 +5,5 @@ export declare class AuthController {
     singIn(signInDto: Record<string, any>): Promise<{
         token: string;
     }>;
+    getProfile(req: any): any;
 }

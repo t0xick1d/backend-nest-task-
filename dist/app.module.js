@@ -24,7 +24,7 @@ exports.AppModule = AppModule = __decorate([
                 isGlobal: true,
                 cache: true,
             }),
-            mongoose_1.MongooseModule.forRoot('mongodb+srv://Zhenia:RtNHTvB1d1xyHjKV@cluster0.t3jxn0o.mongodb.net/questionGenDevs?retryWrites=true&w=majority'),
+            mongoose_1.MongooseModule.forRoot(process.env.DB_HOST),
             topic_module_1.TopicModule,
             auth_module_1.AuthModule,
             user_module_1.UserModule,

@@ -14,10 +14,20 @@ const common_1 = require("@nestjs/common");
 const user_service_1 = require("../user/user.service");
 const jwt_1 = require("@nestjs/jwt");
 const bcrypt = require("bcrypt");
-let AuthService = class AuthService {
+const passport_jwt_1 = require("passport-jwt");
+const passport_1 = require("@nestjs/passport");
+let AuthService = class AuthService extends (0, passport_1.PassportStrategy)(passport_jwt_1.Strategy) {
     constructor(userService, jwtService) {
+        super({
+            jwtFromRequest: passport_jwt_1.ExtractJwt.fromAuthHeaderAsBearerToken(),
+            ignoreExpiration: false,
+            secretOrKey: process.env.JWT_KEY,
+        });
         this.userService = userService;
         this.jwtService = jwtService;
+    }
+    async validate(payload) {
+        return { id: payload.sub, username: payload.username };
     }
     async singIn(email, pass) {
         const user = await this.userService.findOne(email);

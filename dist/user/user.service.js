@@ -17,16 +17,28 @@ const common_1 = require("@nestjs/common");
 const mongoose_1 = require("@nestjs/mongoose");
 const register_schema_1 = require("./schema/register.schema");
 const mongoose_2 = require("mongoose");
+const bcrypt = require("bcrypt");
 let UserService = class UserService {
     constructor(userModel) {
         this.userModel = userModel;
     }
     async register(registerAuthDto) {
+        const { email, password } = registerAuthDto;
+        const user = await this.userModel.findOne({ email });
+        if (user) {
+            throw new common_1.BadRequestException('Email is already exist');
+        }
+        const hashPassword = await bcrypt.hash(password, 10);
         const newUser = {
             ...registerAuthDto,
+            password: hashPassword,
+            verificationToken: '',
         };
         const createUser = await this.userModel.create(newUser);
-        return createUser;
+        return {
+            nickName: createUser.nickName,
+            email: createUser.email,
+        };
     }
     async findOne(email) {
         return await this.userModel.findOne({ email });

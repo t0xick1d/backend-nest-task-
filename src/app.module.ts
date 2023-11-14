@@ -12,9 +12,7 @@ import { AuthModule } from './auth/auth.module';
          isGlobal: true,
          cache: true,
       }),
-      MongooseModule.forRoot(
-         'mongodb+srv://Zhenia:RtNHTvB1d1xyHjKV@cluster0.t3jxn0o.mongodb.net/questionGenDevs?retryWrites=true&w=majority',
-      ),
+      MongooseModule.forRoot(process.env.DB_HOST),
       TopicModule,
       AuthModule,
       UserModule,
